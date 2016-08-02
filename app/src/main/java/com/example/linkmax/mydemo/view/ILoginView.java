@@ -15,4 +15,6 @@ public interface ILoginView {
     void cancelProgressBar();
     void showFailError(String info);
     void showSucceedMsg(User user);
+    void setTransBar();
+    void initSlidingMenu();
 }

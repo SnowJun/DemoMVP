@@ -1,9 +1,12 @@
 package com.example.linkmax.mydemo.bean;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by SnowJun on 2016/7/29.
  */
-public class User {
+public class User implements Parcelable {
 
     private String name;
 
@@ -32,4 +35,32 @@ public class User {
     public void setPwd(String pwd) {
         this.pwd = pwd;
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeString(this.pwd);
+    }
+
+    protected User(Parcel in) {
+        this.name = in.readString();
+        this.pwd = in.readString();
+    }
+
+    public static final Parcelable.Creator<User> CREATOR = new Parcelable.Creator<User>() {
+        @Override
+        public User createFromParcel(Parcel source) {
+            return new User(source);
+        }
+
+        @Override
+        public User[] newArray(int size) {
+            return new User[size];
+        }
+    };
 }
