@@ -17,7 +17,7 @@ public class API {
 
     public static final String NEWS_URL="txapi/social/social/";
     public static final String JOKE_URL="txapi/social/social/";
-    public static final String PIC_URL="txapi/social/social/";
+    public static final String PIC_URL="txapi/mvtp/meinv";
 
 
 }

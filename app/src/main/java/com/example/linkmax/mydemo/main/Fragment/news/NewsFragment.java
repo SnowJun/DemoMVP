@@ -1,6 +1,7 @@
 package com.example.linkmax.mydemo.main.fragment.news;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,19 +13,15 @@ import android.view.ViewGroup;
 
 import com.example.linkmax.mydemo.R;
 import com.example.linkmax.mydemo.base.BaseFragment;
-import com.example.linkmax.mydemo.comman.API;
 import com.example.linkmax.mydemo.main.fragment.news.adapter.NewsAdapter;
 import com.example.linkmax.mydemo.main.fragment.news.bean.NewsBean;
-import com.example.linkmax.mydemo.main.fragment.news.model.NewModel;
 import com.example.linkmax.mydemo.main.fragment.news.presenter.NewsPresenter;
 import com.example.linkmax.mydemo.main.fragment.news.view.INewsView;
-import com.orhanobut.logger.Logger;
 
 import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import retrofit2.Call;
 
 /**
  * 新闻模块
@@ -75,10 +72,18 @@ public class NewsFragment extends BaseFragment implements INewsView {
         showNewsList(been);
     }
 
-    private void showNewsList(List<NewsBean.NewslistBean> been) {
-        NewsAdapter adapter = new NewsAdapter(been,getActivity());
+    private void showNewsList(final List<NewsBean.NewslistBean> been) {
+        NewsAdapter adapter = new NewsAdapter(been, getActivity());
         mRlvNews.setLayoutManager(new LinearLayoutManager(getActivity()));
         mRlvNews.setAdapter(adapter);
+        adapter.setOnItemClickListener(new NewsAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(int position) {
+                Intent intent = new Intent(getActivity(), NewsDetailActivity.class);
+                intent.putExtra("loadUrl", been.get(position).getUrl());
+                startActivity(intent);
+            }
+        });
     }
 
     @Override

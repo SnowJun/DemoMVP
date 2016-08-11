@@ -1,6 +1,8 @@
-package com.example.linkmax.mydemo.main.fragment.news.adapter;
+package com.example.linkmax.mydemo.main.fragment.pic.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -12,8 +14,11 @@ import android.widget.TextView;
 import com.example.linkmax.mydemo.R;
 import com.example.linkmax.mydemo.base.MyApplication;
 import com.example.linkmax.mydemo.main.fragment.news.bean.NewsBean;
+import com.example.linkmax.mydemo.main.fragment.pic.bean.PicBean;
 import com.nostra13.universalimageloader.core.ImageLoader;
-import com.orhanobut.logger.Logger;
+import com.nostra13.universalimageloader.core.assist.FailReason;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
+import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import java.util.List;
 
@@ -26,29 +31,48 @@ import butterknife.ButterKnife;
  * @author SnowJun
  * @since 1.0
  */
-public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
+public class PicAdapter extends RecyclerView.Adapter<PicAdapter.NewsHolder> {
 
 
     private Context mContext;
 
-    private List<NewsBean.NewslistBean> mNewslistBeen;
+    private List<PicBean.NewslistBean> mNewslistBeen;
 
-    public NewsAdapter(List<NewsBean.NewslistBean> newslistBeen, Context context) {
+    public PicAdapter(List<PicBean.NewslistBean> newslistBeen, Context context) {
         mNewslistBeen = newslistBeen;
         mContext = context;
     }
 
     @Override
     public NewsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        NewsHolder holder = new NewsHolder(LayoutInflater.from(mContext).inflate(R.layout.item_news, parent, false));
+        NewsHolder holder = new NewsHolder(LayoutInflater.from(mContext).inflate(R.layout.item_pic, parent, false));
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(NewsHolder holder, final int position) {
-        ImageLoader.getInstance().displayImage(mNewslistBeen.get(position).getPicUrl(),holder.mImgIcon, MyApplication.options);
+    public void onBindViewHolder(final NewsHolder holder, final int position) {
+        ImageLoader.getInstance().loadImage(mNewslistBeen.get(position).getPicUrl(), MyApplication.options, new ImageLoadingListener() {
+            @Override
+            public void onLoadingStarted(String imageUri, View view) {
+
+            }
+
+            @Override
+            public void onLoadingFailed(String imageUri, View view, FailReason failReason) {
+
+            }
+
+            @Override
+            public void onLoadingComplete(String imageUri, View view, Bitmap loadedImage) {
+                holder.mImgIcon.setBackground(new BitmapDrawable(loadedImage));
+            }
+
+            @Override
+            public void onLoadingCancelled(String imageUri, View view) {
+
+            }
+        });
         holder.mTxtTitle.setText(mNewslistBeen.get(position).getTitle());
-        holder.mTxtContent.setText(mNewslistBeen.get(position).getDescription());
         holder.mCvRoot.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -70,8 +94,6 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.NewsHolder> {
         ImageView mImgIcon;
         @Bind(R.id.txt_title)
         TextView mTxtTitle;
-        @Bind(R.id.txt_content)
-        TextView mTxtContent;
         @Bind(R.id.cv_root)
         CardView mCvRoot;
 

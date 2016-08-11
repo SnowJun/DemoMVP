@@ -5,6 +5,7 @@ import com.example.linkmax.mydemo.comman.net.NetListener;
 import com.example.linkmax.mydemo.comman.net.NetUtil;
 import com.example.linkmax.mydemo.main.fragment.news.bean.NewsBean;
 import com.google.gson.Gson;
+import com.orhanobut.logger.Logger;
 
 import java.util.HashMap;
 
@@ -30,6 +31,8 @@ public class NewModel implements INewModel {
         mListNewsCall = NetUtil.getInstance().doGet(API.BASE_URL,API.NEWS_URL, paras, headers,new NetListener() {
             @Override
             public void netSuccess(String info) {
+                Logger.d("info----------->" + info);
+
                 Gson gson = new Gson();
                 NewsBean bean = gson.fromJson(info, NewsBean.class);
                 listener.listSucceed(bean.getNewslist());
