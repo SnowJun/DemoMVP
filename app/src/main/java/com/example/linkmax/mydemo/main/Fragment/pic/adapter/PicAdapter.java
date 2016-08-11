@@ -43,6 +43,7 @@ public class PicAdapter extends RecyclerView.Adapter<PicAdapter.NewsHolder> {
         mContext = context;
     }
 
+
     @Override
     public NewsHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         NewsHolder holder = new NewsHolder(LayoutInflater.from(mContext).inflate(R.layout.item_pic, parent, false));
