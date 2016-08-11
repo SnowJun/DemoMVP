@@ -1,6 +1,6 @@
-package com.example.linkmax.mydemo.model;
+package com.example.linkmax.mydemo.login.model;
 
-import com.example.linkmax.mydemo.bean.User;
+import com.example.linkmax.mydemo.login.bean.User;
 
 /**
  * Created by SnowJun on 2016/7/29.

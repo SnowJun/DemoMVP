@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:clipToPadding="true"
+    android:fitsSystemWindows="true"
+    android:background="@android:color/holo_blue_bright"
+    android:layout_height="match_parent"
+    tools:context=".login.LoginActivity">
+
+
+    <com.jeremyfeinstein.slidingmenu.lib.SlidingMenu
+        xmlns:sliding="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/slidingmenulayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffffff"
+        sliding:behindOffset="0dp"
+        sliding:behindScrollScale="1"
+        sliding:fadeDegree="0.3"
+        sliding:fadeEnabled="true"
+        sliding:touchModeAbove="fullscreen"
+        sliding:viewAbove="@layout/item_main" />
+
+
+
+
+</LinearLayout>

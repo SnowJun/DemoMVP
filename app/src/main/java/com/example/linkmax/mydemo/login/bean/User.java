@@ -1,4 +1,4 @@
-package com.example.linkmax.mydemo.bean;
+package com.example.linkmax.mydemo.login.bean;
 
 import android.os.Parcel;
 import android.os.Parcelable;

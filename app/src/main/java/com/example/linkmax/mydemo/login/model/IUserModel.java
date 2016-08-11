@@ -1,4 +1,4 @@
-package com.example.linkmax.mydemo.model;
+package com.example.linkmax.mydemo.login.model;
 
 /**
  * Created by SnowJun on 2016/7/29.

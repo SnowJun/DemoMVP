@@ -1,11 +1,11 @@
-package com.example.linkmax.mydemo.presenter;
+package com.example.linkmax.mydemo.login.presenter;
 
 import android.os.Handler;
 
-import com.example.linkmax.mydemo.bean.User;
-import com.example.linkmax.mydemo.model.LoginListener;
-import com.example.linkmax.mydemo.model.UserModel;
-import com.example.linkmax.mydemo.view.ILoginView;
+import com.example.linkmax.mydemo.login.bean.User;
+import com.example.linkmax.mydemo.login.model.LoginListener;
+import com.example.linkmax.mydemo.login.model.UserModel;
+import com.example.linkmax.mydemo.login.view.ILoginView;
 
 /**
  * Created by SnowJun 2016/7/29.

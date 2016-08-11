@@ -1,26 +1,25 @@
-package com.example.linkmax.mydemo;
+package com.example.linkmax.mydemo.login;
 
-import android.app.ProgressDialog;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.FragmentActivity;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.linkmax.mydemo.bean.User;
-import com.example.linkmax.mydemo.presenter.LoginPresenter;
-import com.example.linkmax.mydemo.view.ILoginView;
+import com.example.linkmax.mydemo.R;
+import com.example.linkmax.mydemo.base.BaseActivity;
+import com.example.linkmax.mydemo.login.bean.User;
+import com.example.linkmax.mydemo.login.presenter.LoginPresenter;
+import com.example.linkmax.mydemo.login.view.ILoginView;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+import com.orhanobut.logger.Logger;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class MainActivity extends FragmentActivity implements ILoginView {
+public class LoginActivity extends BaseActivity implements ILoginView {
 
 
     @Bind(R.id.edt_user)
@@ -36,8 +35,6 @@ public class MainActivity extends FragmentActivity implements ILoginView {
     @Bind(R.id.slidingmenulayout)
     SlidingMenu mSlidingMenu;
 
-    private ProgressDialog mProgressDialog;
-
     private LoginPresenter mPresenter;
 
 
@@ -45,11 +42,11 @@ public class MainActivity extends FragmentActivity implements ILoginView {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTransBar();
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         mPresenter = new LoginPresenter(this);
-        initSlidingMenu();
-
+//        initSlidingMenu();
+        Logger.e("main_logger");
     }
 
 
@@ -89,16 +86,7 @@ public class MainActivity extends FragmentActivity implements ILoginView {
         mEdtPassword.setText(pwd);
     }
 
-    @Override
-    public void showProgressBar() {
-        mProgressDialog = ProgressDialog.show(this, "", "正在登陆，请稍后..");
-        mProgressDialog.show();
-    }
 
-    @Override
-    public void cancelProgressBar() {
-        mProgressDialog.dismiss();
-    }
 
     @Override
     public void showFailError(String info) {
@@ -119,13 +107,7 @@ public class MainActivity extends FragmentActivity implements ILoginView {
         mSlidingMenu.setMenu(R.layout.menu);
     }
 
-    @Override
-    public void setTransBar() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
-    }
+
 
     @Override
     public void onBackPressed() {
